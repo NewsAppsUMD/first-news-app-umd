@@ -25,7 +25,7 @@ A working example of what you'll make can be found at `ireapps.github.io/first-n
 
 .. image:: /_static/hello-css-markers.png
 
-Past students of this class have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <http://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_. 
+Past students of this class have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <http://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_.
 
 *****************
 About the authors
@@ -46,8 +46,8 @@ Before you can begin, your computer needs the following tools installed and work
 
 1. A `command-line interface <https://en.wikipedia.org/wiki/Command-line_interface>`_ to interact with your computer
 2. A `text editor <https://en.wikipedia.org/wiki/Text_editor>`_ to work with plain text files
-3. Version 2.7 of the `Python <http://python.org/download/releases/2.7.6/>`_ programming language
-4. The `pip <https://pip.pypa.io/en/latest/installing.html>`_ package manager and `virtualenv <http://www.virtualenv.org/en/latest/>`_ environment manager for Python
+3. Version 3.X of the `Python <https://www.python.org/downloads/>`_ programming language
+4. The `pipenv <https://pipenv.pypa.io/en/latest/>`_ package and virtual environment manager for Python
 5. `Git <http://git-scm.com/>`_ version control software and an account at `GitHub.com <http://www.github.com>`_
 
 .. warning::
@@ -63,9 +63,9 @@ Unless something is wrong with your computer, there should be a way to open a wi
 
 On Windows you can find the command-line interface by opening the "command prompt." Here are `instructions <https://www.bleepingcomputer.com/tutorials/windows-command-prompt-introduction/>`_.
 
-On Apple computers, you open the `"Terminal" application <http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line>`_.
+On Apple computers, you open the `"Terminal" application <https://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line>`_.
 
-Ubuntu Linux comes with a program of the `same name <http://askubuntu.com/questions/38162/what-is-a-terminal-and-how-do-i-open-and-use-it>`_.
+Ubuntu Linux comes with a program of the `same name <https://askubuntu.com/questions/38162/what-is-a-terminal-and-how-do-i-open-and-use-it>`_.
 
 Text editor
 -----------
@@ -77,25 +77,27 @@ You need a program that works with simple `"plain text" files <https://en.wikipe
 and is therefore capable of editing documents containing Python code, HTML markup and other languages without
 dressing them up by adding anything extra. Such programs are easy to find and some of the best ones are free, including those below.
 
-For Windows, I recommend installing `Notepad++ <http://notepad-plus-plus.org/>`_.
+For Windows, I recommend installing `Notepad++ <https://notepad-plus-plus.org/>`_.
 
-For Apple computers, try `Sublime Text <https://www.sublimetext.com/>`_.
+For Apple computers, try `Sublime Text <https://www.sublimetext.com/>`_ or `Atom <https://atom.io/>`_.
 
 In Ubuntu Linux you can stick with the pre-installed `gedit <https://help.ubuntu.com/community/gedit>`_ text editor.
 
 Python
 ~~~~~~
 
-Python is a computer programming language, like many others you may have heard of such as Ruby or PHP or Java. It is free and open source. You will need to have version 2.7 installed.
+Python is a computer programming language, like many others you may have heard of such as Ruby or PHP or Java. It is free and open source. We'll be installing Python 3 in a virtual environment, so it doesn't matter what version you have installed currently.
 
 For Mac
 ^^^^^^^
 
-If you are using Mac OSX, Python version 2.7 is probably already installed and you can test to see what version, if any, is already available by typing the following into your terminal.
+If you are using Mac OSX, Python version 2.7 is probably already installed, but we'll be using Python 3. To install that, we'll be using `Homebrew <https://docs.python-guide.org/starting/install3/osx/#install3-osx>`_.
+
+To install Python via Homebrew, you can run the following code:
 
 .. code-block:: bash
 
-    $ python -V
+    $ brew install python
 
 .. note::
 
@@ -107,78 +109,28 @@ You should see something like this after you hit enter:
 .. code-block:: bash
 
     $ python -V
-    Python 2.7.12
+    Python 3.9.7
 
-If you get an error instead, Mac users should install Python by following `these instructions <http://docs.python-guide.org/en/latest/starting/install/osx/>`_ .
-
-If your version is 2.7.11 or 2.7.13 or some other slight variation from what's above, that's okay.
-
-If it's Python 3, that's another issue and you should try to install Python 2.7 instead. If you continue with Python 3, this class may largely work, but you could encounter some small problems you'll need to sort out on your own.
 
 For Windows
 ^^^^^^^^^^^
 
-Windows people should open their command prompt and investigate whether Python is already installed by typing the following command.
+Windows people should follow the instructions `here <https://docs.python-guide.org/starting/install3/win/#install3-windows>`_.
 
-.. code-block:: bash
+.. _command-line-pipenv:
 
-    $ python -V
-
-.. note::
-
-    You'll note that the example above begins with a "$". You do not need to type this. It is only a generic symbol
-    commonly used by geeks to indicate a piece of code should be run from the command line. On Windows, this prompt could even look quite different, likely starting with a phrase like ``C:\``.
-
-You should see something like this after you hit enter:
-
-.. code-block:: bash
-
-    $ python -V
-    Python 2.7.12
-
-
-If you get an error instead, install Python by following the installation guide `here <http://docs.python-guide.org/en/latest/starting/install/win/>`_ which will have you download and install Python from `here <https://www.python.org/downloads/release/python-2712/>`_. After that's done, ensure Python is installed by reopening the command prompt and running the command above again.
-
-If your version is 2.7.11 or 2.7.13 or some other slight variation from what's above, that's okay.
-
-If it's Python 3, that's another issue and you should try to install Python 2.7 instead. If you continue with Python 3, this class may largely work, but you could encounter some small problems you'll need to sort out on your own.
-
-.. _command-line-pip:
-
-pip and virtualenv
+pipenv
 ~~~~~~~~~~~~~~~~~~
 
-The `pip package manager <https://pip.pypa.io/en/latest/>`_ makes it easy to install open-source libraries that expand what you're able to do with Python. Later, we will use it to install everything needed to create a working web application.
+The `pipenv package manager <https://pipenv.pypa.io/>`_ makes it easy to install open-source libraries that expand what you're able to do with Python. Later, we will use it to install everything needed to create a working web application.
 
-Verify pip is installed with the following command:
-
-.. code-block:: bash
-
-    $ pip -V
-
-If you get and error, that means you don't have pip installed. You can get it by following `these instructions <https://pip.pypa.io/en/latest/installing.html>`_.
-
-The `virtualenv environment manager <http://www.virtualenv.org/en/latest/>`_ makes it possible to create an isolated corner of your computer where all the different tools you use to build an application are sealed off.
-
-It might not be obvious why you need to do this, but it quickly becomes important when you need to juggle different tools for different projects on one computer. By developing your applications inside separate virtualenv environments, you can use different versions of the same third-party Python libraries without a conflict. You can also more easily recreate your project on another machine, handy when you want to copy your code to a server that publishes pages on the Internet.
-
-You can check if virtualenv is installed with the following command:
+Verify pipenv is installed with the following command:
 
 .. code-block:: bash
 
-    $ virtualenv --version
+    $ pipenv -v
 
-If you don't have virtualenv, install it with pip.
-
-.. code-block:: bash
-
-    # On Windows:
-    $ pip install virtualenv
-    # On a Mac or Linux you will need to install it as a superuser with the sudo command.
-    # When you are prompted for a password, use the same one that logs you into your computer
-    $ sudo pip install virtualenv
-
-If that doesn't work, `try following this advice <http://virtualenv.readthedocs.org/en/latest/installation.html>`_.
+If you get and error, that means you don't have pipenv installed. You can get it by following `these instructions <https://pipenv.pypa.io/en/latest/install/#pragmatic-installation-of-pipenv>`_.
 
 Git and GitHub
 --------------
@@ -203,44 +155,31 @@ Once that's done, you should create an account at GitHub, if you don't already h
 Act 1: Hello Git
 ****************
 
-Start by creating a new development environment with virtualenv. Name it after our application.
-
-.. code-block:: bash
-
-    # You don't have to type the "$" It's just a generic symbol
-    # geeks use to show they're working on the command line.
-    $ virtualenv first-news-app
-
-Jump into the directory it created.
+Start at our first-news-app directory.
 
 .. code-block:: bash
 
     $ cd first-news-app
 
-Turn on the new virtualenv, which will instruct your terminal to only use those libraries installed
-inside its sealed space. You only need to create the virtualenv once, but you'll need to repeat these
-"activation" steps each time you return to working on this project.
+Create a new development environment with pipenv, specifying the version of python:
 
 .. code-block:: bash
 
-    # In Linux or Mac OSX try this...
-    $ . bin/activate
-    # In Windows it might take something more like...
-    $ cd Scripts
-    $ . .\activate
-    $ cd ..
+    # You don't have to type the "$" It's just a generic symbol
+    # geeks use to show they're working on the command line.
+    $ pipenv --python=python3
+
+Then activate it (it's like turning on the power):
+
+.. code-block:: bash
+
+    $ pipenv shell
 
 Create a new Git repository.
 
 .. code-block:: bash
 
     $ git init repo
-
-Jump into the repository.
-
-.. code-block:: bash
-
-    $ cd repo
 
 Visit `GitHub <http://www.github.com>`_ and create a new public repository named ``first-news-app``. Don't check "Initialize with README." You want to start with a blank repository.
 
@@ -290,7 +229,7 @@ Now, finally, push your commit up to GitHub.
 
 .. code-block:: bash
 
-    $ git push origin master
+    $ git push origin main
 
 Reload your repository on GitHub and see your handiwork.
 
@@ -298,11 +237,11 @@ Reload your repository on GitHub and see your handiwork.
 Act 2: Hello Flask
 ******************
 
-Use pip on the command line to install `Flask <http://flask.pocoo.org/>`_, the Python "microframework" we'll use to put together our website.
+Use pipenv on the command line to install `Flask <https://flask.palletsprojects.com/en/2.0.x/>`_, the Python "microframework" we'll use to put together our website.
 
 .. code-block:: bash
 
-    $ pip install Flask
+    $ pipenv install Flask
 
 Create a new file called ``app.py`` where we will configure Flask.
 
@@ -519,7 +458,7 @@ First, create the new function and give it the path to your CSV file.
     if __name__ == '__main__':
         app.run(debug=True, use_reloader=True)
 
-Open up the file path for reading with Python using the built-in `open <https://docs.python.org/2/library/functions.html#open>`_ function.
+Open up the file path for reading with Python using the built-in `open <https://docs.python.org/3/library/functions.html#open>`_ function.
 
 .. code-block:: python
     :emphasize-lines: 8
@@ -541,7 +480,7 @@ Open up the file path for reading with Python using the built-in `open <https://
     if __name__ == '__main__':
         app.run(debug=True, use_reloader=True)
 
-Pass it into the csv module's `DictReader <https://docs.python.org/2/library/csv.html#csv.DictReader>`_, to be parsed and returned as a list of dictionaries.
+Pass it into the csv module's `DictReader <https://docs.python.org/3/library/csv.html#csv.DictReader>`_, to be parsed and returned as a list of dictionaries.
 
 .. code-block:: python
     :emphasize-lines: 9
@@ -566,7 +505,7 @@ Pass it into the csv module's `DictReader <https://docs.python.org/2/library/csv
 
 .. note::
 
-    Don't know what a dictionary is? That's okay. You can read more about them `here <http://learnpythonthehardway.org/book/ex39.html>`_ but the minimum you need to know now is that they are Python's way of handling each row in your CSV. The columns there, like ``id`` or ``gender``, are translated into "keys" on dictionary objects that you can access like ``row['id']``.
+    Don't know what a dictionary is? That's okay. You can read more about them `here <https://learnpythonthehardway.org/book/ex39.html>`_ but the minimum you need to know now is that they are Python's way of handling each row in your CSV. The columns there, like ``id`` or ``gender``, are translated into "keys" on dictionary objects that you can access like ``row['id']``.
 
 A quirk of CSV objects is that once they're used they disappear. There's a good reason related to efficiency and memory limitations and all that but we won't bother with that here. Just take our word and use Python's built-in ``list`` function to convert this one to a permanent list.
 
@@ -1360,11 +1299,11 @@ Act 5: Hello Internet
 
 In this final act, we will publish your application to the Internet using `Frozen Flask <http://pythonhosted.org/Frozen-Flask/>`_, a Python library that saves every page you've made with Flask as a flat file that can be uploaded to the web. This is an alternative publishing method that does not require you configure and host an full-fledged Internet server.
 
-First, use pip to install Frozen Flask from the command line.
+First, use pipenv to install Frozen Flask from the command line.
 
 .. code-block:: bash
 
-    $ pip install Frozen-Flask
+    $ pipenv install Frozen-Flask
 
 Create a new file called ``freeze.py`` where we will configure which pages it should convert into flat files.
 
