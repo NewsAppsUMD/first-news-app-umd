@@ -180,7 +180,7 @@ Create a new Git repository.
 
 .. code-block:: bash
 
-    $ git init repo
+    $ git init
 
 Visit `GitHub <http://www.github.com>`_ and create a new public repository named ``first-news-app``. Don't check "Initialize with README." You want to start with a blank repository.
 
