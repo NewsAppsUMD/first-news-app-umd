@@ -155,10 +155,11 @@ Once that's done, you should create an account at GitHub, if you don't already h
 Act 1: Hello Git
 ****************
 
-Start at our first-news-app directory.
+Start by making our first-news-app directory.
 
 .. code-block:: bash
 
+    $ mkdir first-news-app
     $ cd first-news-app
 
 Create a new development environment with pipenv, specifying the version of python:
