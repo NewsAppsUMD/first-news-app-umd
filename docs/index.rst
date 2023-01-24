@@ -44,169 +44,40 @@ Prelude: Prerequisites
 
 Before you can begin, your computer needs the following tools installed and working.
 
-1. A `command-line interface <https://en.wikipedia.org/wiki/Command-line_interface>`_ to interact with your computer
-2. A `text editor <https://en.wikipedia.org/wiki/Text_editor>`_ to work with plain text files
-3. Version 3.X of the `Python <https://www.python.org/downloads/>`_ programming language
-4. The `pipenv <https://pipenv.pypa.io/en/latest/>`_ package and virtual environment manager for Python
-5. `Git <http://git-scm.com/>`_ version control software and an account at `GitHub.com <http://www.github.com>`_
+1. An account at `GitHub.com <http://www.github.com>`_
+2. A browser. That's it! (We'll be using GitHub's Codespaces.)
 
-.. warning::
+***********************
+Act 1: Hello Codespaces
+***********************
 
-    Stop and make sure you have all these tools installed and working properly. Otherwise, `you're gonna have a bad time <https://www.youtube.com/watch?v=ynxPshq8ERo>`_.
+Start at the `GitHub URL for this repository <https://github.com/NewsApps/first-web-scraper-umd>`_
 
-.. _command-line-prereq:
+Click the green "Use this template" button and choose "Open in a codespace". You should see something like this:
 
-Command-line interface
-~~~~~~~~~~~~~~~~~~~~~~
+.. image:: /_static/codespaces.png
 
-Unless something is wrong with your computer, there should be a way to open a window that lets you type in commands. Different operating systems give this tool slightly different names, but they all have some form of it.
+The browser is divided into three sections: on the left is a file explorer, listing all of the files in this repository. The top right shows whatever file you're currently viewing or editing, defaulting to README.md. The bottom right shows the terminal, where we'll run commands.
 
-On Windows you can find the command-line interface by opening the "command prompt." Here are `instructions <https://www.bleepingcomputer.com/tutorials/windows-command-prompt-introduction/>`_.
+The codespace will be connected to your repository in the `the NewsApps organization on GitHub <https://github.com/NewsAppsUMD/>`_.
 
-On Apple computers, you open the `"Terminal" application <https://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line>`_.
-
-Ubuntu Linux comes with a program of the `same name <https://askubuntu.com/questions/38162/what-is-a-terminal-and-how-do-i-open-and-use-it>`_.
-
-Text editor
------------
-
-A program like Microsoft Word, which can do all sorts of text formatting like
-change the size and color of words, is not what you need. Do not try to use it.
-
-You need a program that works with simple `"plain text" files <https://en.wikipedia.org/wiki/Text_file>`_,
-and is therefore capable of editing documents containing Python code, HTML markup and other languages without
-dressing them up by adding anything extra. Such programs are easy to find and some of the best ones are free, including those below.
-
-For Windows, I recommend installing `Notepad++ <https://notepad-plus-plus.org/>`_.
-
-For Apple computers, try `Sublime Text <https://www.sublimetext.com/>`_ or `Atom <https://atom.io/>`_.
-
-In Ubuntu Linux you can stick with the pre-installed `gedit <https://help.ubuntu.com/community/gedit>`_ text editor.
-
-Python
-~~~~~~
-
-Python is a computer programming language, like many others you may have heard of such as Ruby or PHP or Java. It is free and open source. We'll be installing Python 3 in a virtual environment, so it doesn't matter what version you have installed currently.
-
-For Mac
-^^^^^^^
-
-If you are using Mac OSX, Python version 2.7 is probably already installed, but we'll be using Python 3. To install that, we'll be using `Homebrew <https://docs.python-guide.org/starting/install3/osx/#install3-osx>`_.
-
-To install Python via Homebrew, you can run the following code:
-
-.. code-block:: bash
-
-    $ brew install python
-
-.. note::
-
-    You'll note that the example above begins with a "$". You do not need to type this. It is only a generic symbol
-    commonly used by geeks to indicate a piece of code should be run from the command line. On Windows, this prompt could even look quite different, likely starting with a phrase like ``C:\``.
-
-You should see something like this after you hit enter:
-
-.. code-block:: bash
-
-    $ python -V
-    Python 3.9.7
-
-
-For Windows
-^^^^^^^^^^^
-
-Windows people should follow the instructions `here <https://docs.python-guide.org/starting/install3/win/#install3-windows>`_.
-
-.. _command-line-pipenv:
-
-pipenv
-~~~~~~~~~~~~~~~~~~
-
-The `pipenv package manager <https://pipenv.pypa.io/>`_ makes it easy to install open-source libraries that expand what you're able to do with Python. Later, we will use it to install everything needed to create a working web application.
-
-Verify pipenv is installed with the following command:
-
-.. code-block:: bash
-
-    $ pipenv -v
-
-If you get and error, that means you don't have pipenv installed. You can get it by following `these instructions <https://pipenv.pypa.io/en/latest/install/#pragmatic-installation-of-pipenv>`_.
-
-Git and GitHub
---------------
-
-`Git <http://git-scm.com/>`_ is a version control program for saving the changes you make to files over time. This is useful when you're working on your own, but quickly becomes essential with large software projects when you work with other developers.
-
-`GitHub <https://github.com/>`_ is a website that hosts git code repositories, both public and private. It comes with many helpful tools for reviewing code and managing projects. It also has some `extra tricks <http://pages.github.com/>`_ that make it easy to publish web pages, which we will use later.
-
-GitHub offers helpful guides for installing Git for `Windows <https://help.github.com/articles/set-up-git#platform-windows>`_, `Macs <https://help.github.com/articles/set-up-git#platform-mac>`_ and `Linux <https://help.github.com/articles/set-up-git#platform-linux>`_.
-
-You can verify it's installed from your command line like so:
-
-.. code-block:: bash
-
-    $ git --version
-
-Once that's done, you should create an account at GitHub, if you don't already have one. `The free plan <https://github.com/pricing>`_ is all that's required to complete this lesson.
-
-.. _activate:
-
-****************
-Act 1: Hello Git
-****************
-
-Start by making our first-news-app directory.
-
-.. code-block:: bash
-
-    $ mkdir first-news-app
-    $ cd first-news-app
-
-Create a new development environment with pipenv, specifying the version of python:
-
-.. code-block:: bash
-
-    # You don't have to type the "$" It's just a generic symbol
-    # geeks use to show they're working on the command line.
-    $ pipenv --python=python3
-
-Then activate it (it's like turning on the power):
-
-.. code-block:: bash
-
-    $ pipenv shell
-
-Create a new Git repository.
-
-.. code-block:: bash
-
-    $ git init
-
-Visit `GitHub <http://www.github.com>`_ and create a new public repository named ``first-news-app``. Don't check "Initialize with README." You want to start with a blank repository.
-
-Then connect your local directory to GitHub with the following command.
-
-.. code-block:: bash
-
-    $ git remote add origin https://github.com/<yourusername>/first-news-app.git
-
-Create your first file, a blank ``README`` with a `Markdown <https://en.wikipedia.org/wiki/Markdown>`_ file extension since that's `the preferred format of GitHub <https://help.github.com/articles/github-flavored-markdown>`_.
-
-.. code-block:: bash
-
-    # Macs or Linux:
-    $ touch README.md
-    # In Windows fire it up in your text editor right away:
-    $ start notepad++ README.md
-
-Open up the README in your text editor and type something in it. Maybe something like:
+Open up the README by clicking on README.md on the left side and type something in it. Maybe change the heading like:
 
 .. code-block:: markdown
 
-    My first news app
-    =================
+    # My First Web News App
 
-Make sure to save it. Then officially add the file to your repository for tracking with Git's ``add`` command.
+Make sure to save it. You'll see on the left that there's a yellow "M" next to README.md, meaning you've made some edits. Let's double-check that in the terminal:
+
+.. code-block:: bash
+
+    $ git status
+
+You should see something like this:
+
+.. image:: /_static/git_status.png
+
+If so, we can add and commit it:
 
 .. code-block:: bash
 
@@ -217,14 +88,6 @@ Log its creation with Git's ``commit`` command. You can include a personalized m
 .. code-block:: bash
 
     $ git commit -m "First commit"
-
-If this is your first time using Git, you may be prompted to configure you name and email.
-If so, take the time now. Then run the ``commit`` command above again.
-
-.. code-block:: bash
-
-    $ git config --global user.email "your@email.com"
-    $ git config --global user.name "your name"
 
 Now, finally, push your commit up to GitHub.
 
@@ -238,11 +101,11 @@ Reload your repository on GitHub and see your handiwork.
 Act 2: Hello Flask
 ******************
 
-Use pipenv on the command line to install `Flask <https://flask.palletsprojects.com/en/2.0.x/>`_, the Python "microframework" we'll use to put together our website.
+Use pip on the command line to install `Flask <https://flask.palletsprojects.com/en/2.0.x/>`_, the Python "microframework" we'll use to put together our website.
 
 .. code-block:: bash
 
-    $ pipenv install Flask
+    $ pip install Flask
 
 Create a new file called ``app.py`` where we will configure Flask.
 
@@ -250,8 +113,6 @@ Create a new file called ``app.py`` where we will configure Flask.
 
     # Again, Macs and Linux:
     $ touch app.py
-    # Windows:
-    $ start notepad++ app.py
 
 Open ``app.py`` with your text editor and import the Flask basics. This is the file that will serve as your
 application's "backend," routing data to the appropriate pages.
@@ -355,8 +216,6 @@ Next create the ``index.html`` file we referenced in ``app.py``. This is the HTM
 
     # Macs and Linux:
     $ touch templates/index.html
-    # Windows:
-    $ start notepad++ templates/index.html
 
 Open it up in your text editor and write something clever.
 
@@ -720,8 +579,6 @@ Create a new file in your templates directory called ``detail.html`` for it to c
 
     # Macs and Linux:
     $ touch templates/detail.html
-    # Windows:
-    $ start notepad++ templates/detail.html
 
 Put something simple in it with your text editor. We'll use the same templating language as above to print out the row id for each page.he
 
@@ -1300,11 +1157,11 @@ Act 5: Hello Internet
 
 In this final act, we will publish your application to the Internet using `Frozen Flask <http://pythonhosted.org/Frozen-Flask/>`_, a Python library that saves every page you've made with Flask as a flat file that can be uploaded to the web. This is an alternative publishing method that does not require you configure and host an full-fledged Internet server.
 
-First, use pipenv to install Frozen Flask from the command line.
+First, use pip to install Frozen Flask from the command line.
 
 .. code-block:: bash
 
-    $ pipenv install Frozen-Flask
+    $ pip install Frozen-Flask
 
 Create a new file called ``freeze.py`` where we will configure which pages it should convert into flat files.
 
@@ -1312,8 +1169,6 @@ Create a new file called ``freeze.py`` where we will configure which pages it sh
 
     # Mac and Linux:
     $ touch freeze.py
-    # Windows:
-    $ start notepad++ freeze.py
 
 Use your text editor to write a basic Frozen Flask configuration.
 
@@ -1403,8 +1258,6 @@ code that controls the design of the page can be stored.
 
     # Macs or Linux:
     $ touch static/style.css
-    # In Windows fire it up in your text editor right away:
-    $ start notepad++ static/style.css
 
 Add the style tag to the top of ``index.html`` so it imported on the page. Flask's built-in ``url_for``
 method will create the URL for us.
@@ -2005,5 +1858,5 @@ Republish your work by going back to the ``gh-pages`` branch and pushing up the 
     $ git merge master
     $ git push origin gh-pages
 
-Now wait a minute or two, then visit ``http://<yourusername>.github.io/first-news-app/build/index.html`` to see
+Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to see
 the restyled application.
