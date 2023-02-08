@@ -18,25 +18,24 @@ What you will make
 By the end of this lesson, you will publish an interactive database and map
 about the dozens of people who died during the riots that swept Los Angeles
 for five days in 1992. You will do this by repurposing the data from `a Los Angeles Times
-application <http://spreadsheets.latimes.com/la-riots-deaths/>`_ that
+application <https://spreadsheets.latimes.com/la-riots-deaths/>`_ that
 accompanied a story released on the 20th anniversary of the riots.
 
-A working example of what you'll make can be found at `ireapps.github.io/first-news-app/build/index.html <http://ireapps.github.io/first-news-app/build/index.html>`_
+A working example of what you'll make can be found at `ireapps.github.io/first-news-app/build/index.html <https://ireapps.github.io/first-news-app/build/index.html>`_
 
 .. image:: /_static/hello-css-markers.png
 
-Past students of this class have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <http://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_.
+Past students of this class have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <https://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_.
 
 *****************
 About the authors
 *****************
 
-This guide was prepared for training sessions of `Investigative Reporters and Editors (IRE) <http://www.ire.org/>`_
-and the `National Institute for Computer-Assisted Reporting (NICAR) <http://data.nicar.org/>`_
-by `Ben Welsh <http://palewi.re/who-is-ben-welsh/>`_. It debuted in February 2014 `at NICAR's conference
+This guide was prepared for training sessions of `Investigative Reporters and Editors (IRE) <https://www.ire.org/>`_
+by `Ben Welsh <https://palewi.re/who-is-ben-welsh/>`_. It debuted in February 2014 `at NICAR's conference
 in Baltimore <https://ire.org/events-and-training/event/973/1026/>`_. A revised version was presented at
-`the 2015 conference <http://ire.org/conferences/nicar2015/hands-on-training/>`_ in Atlanta and the 2016 conference in
-`Denver <http://www.ire.org/conferences/nicar2016/schedule/>`_. It was taught for the fourth time at `the 2017 conference in Jacksonville <https://www.ire.org/events-and-training/event/2702/2885/>`_ by Armand Emamdjomeh and Ben Welsh.
+`the 2015 conference <https://www.ire.org/conferences/nicar2015/hands-on-training/>`_ in Atlanta and the 2016 conference in
+`Denver <https://www.ire.org/conferences/nicar2016/schedule/>`_. It was taught for the fourth time at `the 2017 conference in Jacksonville <https://www.ire.org/events-and-training/event/2702/2885/>`_ by Armand Emamdjomeh and Ben Welsh.
 
 **********************
 Prelude: Prerequisites
@@ -44,7 +43,7 @@ Prelude: Prerequisites
 
 Before you can begin, your computer needs the following tools installed and working.
 
-1. An account at `GitHub.com <http://www.github.com>`_
+1. An account at `GitHub.com <https://www.github.com>`_
 2. A browser. That's it! (We'll be using GitHub's Codespaces.)
 
 ***********************
@@ -101,7 +100,7 @@ Reload your repository on GitHub and see your handiwork.
 Act 2: Hello Flask
 ******************
 
-Use pip on the command line to install `Flask <https://flask.palletsprojects.com/en/2.0.x/>`_, the Python "microframework" we'll use to put together our website.
+Use pip on the command line to install `Flask <https://palletsprojects.com/p/flask/>`_, the Python "microframework" we'll use to put together our website.
 
 .. code-block:: bash
 
@@ -204,7 +203,7 @@ Now use one of Flask's coolest tricks, the ``app.route`` decorator, to connect t
         # Fire up the Flask test server
         app.run(debug=True, use_reloader=True)
 
-Return to your command line and create a directory to store your templates in `the default location Flask expects <http://flask.pocoo.org/docs/quickstart/#rendering-templates>`_.
+Return to your command line and create a directory to store your templates in `the default location Flask expects <https://flask.palletsprojects.com/en/2.2.x/quickstart/#rendering-templates>`_.
 
 .. code-block:: bash
 
@@ -442,7 +441,7 @@ Next have your ``index`` function pull the CSV data using your new code and pass
     if __name__ == '__main__':
         app.run(debug=True, use_reloader=True)
 
-Make sure to save ``app.py``. Then return to the ``index.html`` template. There you can dump out the ``object_list`` data using Flask's templating language `Jinja <http://jinja.pocoo.org/>`_.
+Make sure to save ``app.py``. Then return to the ``index.html`` template. There you can dump out the ``object_list`` data using Flask's templating language `Jinja <https://jinja.palletsprojects.com/en/3.1.x/>`_.
 
 .. code-block:: jinja
     :emphasize-lines: 6
@@ -464,7 +463,7 @@ If it isn't already running, return the command line, restart your test server a
 
 .. image:: /_static/hello-html-dump.png
 
-Now we'll use Jinja to sculpt the data in ``index.html`` to create `an HTML table <http://www.w3schools.com/html/html_tables.asp>`_ that lists all the names. Flask's templating language allows us to loop through the data list and print out a row for each record.
+Now we'll use Jinja to sculpt the data in ``index.html`` to create `an HTML table <https://www.w3schools.com/html/html_tables.asp>`_ that lists all the names. Flask's templating language allows us to loop through the data list and print out a row for each record.
 
 .. code-block:: jinja
     :emphasize-lines: 6-15
@@ -758,7 +757,7 @@ One last thing before we move on. What if somebody vists an URL for an ``id`` th
 
 .. image:: /_static/hello-html-error.png
 
-The polite thing to do is return what is called a `404 response code <http://en.wikipedia.org/wiki/HTTP_404>`_. To do that with Flask, you only need to import a function called ``abort`` and run it after our loop finishes without finding a match.
+The polite thing to do is return what is called a `404 response code <https://en.wikipedia.org/wiki/HTTP_404>`_. To do that with Flask, you only need to import a function called ``abort`` and run it after our loop finishes without finding a match.
 
 .. code-block:: python
     :emphasize-lines: 3,27
@@ -802,7 +801,7 @@ Reload your bad URL and you'll see the change.
 Act 4: Hello JavaScript
 ***********************
 
-Now we will use the `Leaflet <http://leafletjs.com/>`_ JavaScript library to create a map on each detail page showing where the victim died. Start by importing it in your page.
+Now we will use the `Leaflet <https://leafletjs.com/>`_ JavaScript library to create a map on each detail page showing where the victim died. Start by importing it in your page.
 
 .. code-block:: html
     :emphasize-lines: 3-6
@@ -842,9 +841,9 @@ Open up ``detail.html`` and make a map there, focus on just that victim.
             </h1>
             <script type="text/javascript">
                 var map = L.map('map').setView([{{ object.y }}, {{ object.x }}], 16);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var marker = L.marker([{{ object.y }}, {{ object.x }}]).addTo(map);
@@ -904,9 +903,9 @@ Create an HTML element to hold the map and use Leaflet to boot it up and center 
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
                 });
                 map.addLayer(osmLayer);
             </script>
@@ -955,9 +954,9 @@ Loop through the CSV data and format it as a `GeoJSON <https://en.wikipedia.org/
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1026,9 +1025,9 @@ Add a popup on the map pins that shows the name of the victim.
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1101,9 +1100,9 @@ Now wrap the name in a hyperlink to that person's detail page.
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1155,7 +1154,7 @@ Commit your map.
 Act 5: Hello Internet
 *********************
 
-In this final act, we will publish your application to the Internet using `Frozen Flask <http://pythonhosted.org/Frozen-Flask/>`_, a Python library that saves every page you've made with Flask as a flat file that can be uploaded to the web. This is an alternative publishing method that does not require you configure and host an full-fledged Internet server.
+In this final act, we will publish your application to the Internet using `Frozen Flask <https://pythonhosted.org/Frozen-Flask/>`_, a Python library that saves every page you've made with Flask as a flat file that can be uploaded to the web. This is an alternative publishing method that does not require you configure and host an full-fledged Internet server.
 
 First, use pip to install Frozen Flask from the command line.
 
@@ -1222,7 +1221,7 @@ Commit all of the flat pages to the repository.
     $ git commit -m "Froze my app"
     $ git push origin master
 
-Finally, we will publish these static files to the web using `GitHub's Pages <http://pages.github.com/>`_ feature. All it requires is that we create a new branch in our repository called ``gh-pages`` and push our files up to GitHub there.
+Finally, we will publish these static files to the web using `GitHub's Pages <https://pages.github.com/>`_ feature. All it requires is that we create a new branch in our repository called ``gh-pages`` and push our files up to GitHub there.
 
 .. code-block:: bash
 
@@ -1230,7 +1229,7 @@ Finally, we will publish these static files to the web using `GitHub's Pages <ht
     $ git merge master # Pull in all the code from the master branch
     $ git push origin gh-pages # Push up to GitHub from your new branch
 
-Now wait a minute or two, then visit ``http://<yourusername>.github.io/first-news-app/build/index.html`` to cross the finish line.
+Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to cross the finish line.
 
 .. image:: /_static/hello-internet.png
 
@@ -1238,8 +1237,7 @@ Now wait a minute or two, then visit ``http://<yourusername>.github.io/first-new
 
     If your page does not appear, make sure that you have verified your email address with GitHub. It is required before the site will allow publishing pages. And keep in mind there are many other options for publishing flat files, like `Amazon's S3 service <https://en.wikipedia.org/wiki/Amazon_S3>`_.
 
-So you've built a site. But it's kind of janky looking. The next chapter, which we won't have time for in class,
-will show you how to dress it up to look like the `demonstration site <http://ireapps.github.io/first-news-app/build/index.html>`_.
+So you've built a site. But it's kind of janky looking. The next chapter will show you how to dress it up to look like the `demonstration site <http://ireapps.github.io/first-news-app/build/index.html>`_.
 
 *******************
 Epilogue: Hello CSS
@@ -1299,9 +1297,9 @@ method will create the URL for us.
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1357,14 +1355,14 @@ with a new byline.
         </head>
         <body>
             <nav>
-                <a href="http://first-news-app.readthedocs.org/">
+                <a href="https://first-news-app.readthedocs.org/">
                     <img src="{{ url_for('static', filename='irelogo.png') }}">
                 </a>
             </nav>
             <header>
                 <h1>These are the 60 people who died during the L.A. riots</h1>
                 <div class="byline">
-                    By <a href="http://first-news-app.readthedocs.org/">The First News App Tutorial</a>
+                    By <a href="https://first-news-app-umd.readthedocs.org/">The First News App Tutorial</a>
                 </div>
             </header>
             <div id="map" style="width:100%; height:300px;"></div>
@@ -1392,9 +1390,9 @@ with a new byline.
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1523,14 +1521,14 @@ First the HTML page needs an extra tag to turn the system on.
         </head>
         <body>
             <nav>
-                <a href="http://first-news-app.readthedocs.org/">
+                <a href="https://first-news-app-umd.readthedocs.org/">
                     <img src="{{ url_for('static', filename='irelogo.png') }}">
                 </a>
             </nav>
             <header>
                 <h1>These are the 60 people who died during the L.A. riots</h1>
                 <div class="byline">
-                    By <a href="http://first-news-app.readthedocs.org/">The First News App Tutorial</a>
+                    By <a href="https://first-news-app-umd.readthedocs.org/">The First News App Tutorial</a>
                 </div>
             </header>
             <div id="map" style="width:100%; height:300px;"></div>
@@ -1558,9 +1556,9 @@ First the HTML page needs an extra tag to turn the system on.
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1704,14 +1702,14 @@ Now expand our Leaflet JavaScript code to substitute these images for the defaul
         </head>
         <body>
             <nav>
-                <a href="http://first-news-app.readthedocs.org/">
+                <a href="https://first-news-app-umd.readthedocs.org/">
                     <img src="{{ url_for('static', filename='irelogo.png') }}">
                 </a>
             </nav>
             <header>
                 <h1>These are the 60 people who died during the L.A. riots</h1>
                 <div class="byline">
-                    By <a href="http://first-news-app.readthedocs.org/">The First News App Tutorial</a>
+                    By <a href="https://first-news-app.readthedocs.org/">The First News App Tutorial</a>
                 </div>
             </header>
             <div id="map" style="width:100%; height:300px;"></div>
@@ -1739,9 +1737,9 @@ Now expand our Leaflet JavaScript code to substitute these images for the defaul
             </table>
             <script type="text/javascript">
                 var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var data = {
@@ -1804,7 +1802,7 @@ Extending this new design to detail page is simply a matter of repeating the ste
         </head>
         <body>
             <nav>
-                <a href="http://first-news-app.readthedocs.org/">
+                <a href="https://first-news-app-umd.readthedocs.org/">
                     <img src="{{ url_for('static', filename='irelogo.png') }}">
                 </a>
             </nav>
@@ -1815,9 +1813,9 @@ Extending this new design to detail page is simply a matter of repeating the ste
             <div id="map" style="width:100%; height:300px;"></div>
             <script type="text/javascript">
                 var map = L.map('map').setView([{{ object.y }}, {{ object.x }}], 16);
-                var osmLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
                 });
                 map.addLayer(osmLayer);
                 var blackIcon = L.Icon.extend({
