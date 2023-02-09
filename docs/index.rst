@@ -110,10 +110,10 @@ Create a new file called ``app.py`` where we will configure Flask.
 
 .. code-block:: bash
 
-    # Again, Macs and Linux:
+    # in the terminal:
     $ touch app.py
 
-Open ``app.py`` with your text editor and import the Flask basics. This is the file that will serve as your
+Open ``app.py`` with your code editor and import the Flask basics. This is the file that will serve as your
 application's "backend," routing data to the appropriate pages.
 
 .. code-block:: python
@@ -212,8 +212,7 @@ Return to your command line and create a directory to store your templates in `t
 Next create the ``index.html`` file we referenced in ``app.py``. This is the HTML file where your will lay out your webpage.
 
 .. code-block:: bash
-
-    # Macs and Linux:
+:
     $ touch templates/index.html
 
 Open it up in your text editor and write something clever.
@@ -228,7 +227,7 @@ Now restart your Flask server.
 
     $ python app.py
 
-Head back to your browser and visit `localhost:5000 <http://localhost:5000>`_ again. You should see the contents of your template displayed on the page.
+Head back to your browser and visit your site again. You should see the contents of your template displayed on the page.
 
 .. image:: /_static/hello-flask-hello-world.png
 
@@ -252,7 +251,7 @@ Push it up to GitHub and check out the changes there.
 
 .. code-block:: bash
 
-    $ git push origin master
+    $ git push origin main
 
 Congratulations, you've made a real web page with Flask. Now to put something useful in it.
 
@@ -278,7 +277,7 @@ Commit the changes to your repository, if only for practice.
 
     $ git add templates/index.html
     $ git commit -m "Real HTML"
-    $ git push origin master
+    $ git push origin main
 
 Make a directory to store our data file.
 
@@ -292,7 +291,7 @@ Download `the comma-delimited file <https://raw.github.com/ireapps/first-news-ap
 
     $ git add static
     $ git commit -m "Added CSV source data"
-    $ git push origin master
+    $ git push origin main
 
 Next we will open up ``app.py`` in your text editor and create a function that uses Python's ``csv`` module to access the data.
 
@@ -535,7 +534,7 @@ Then commit your work.
 
     $ git add .
     $ git commit -m "Created basic table"
-    $ git push origin master
+    $ git push origin main
 
 Next we're going to create a unique "detail" page dedicated to each person. Start by returning to ``app.py`` in your text editor and adding the URL and template that will help make this happen.
 
@@ -576,7 +575,7 @@ Create a new file in your templates directory called ``detail.html`` for it to c
 
 .. code-block:: bash
 
-    # Macs and Linux:
+    # in the terminal:
     $ touch templates/detail.html
 
 Put something simple in it with your text editor. We'll use the same templating language as above to print out the row id for each page.he
@@ -751,7 +750,7 @@ Then once again commit your work.
 
     $ git add .
     $ git commit -m "Created a detail page about each victim."
-    $ git push origin master
+    $ git push origin main
 
 One last thing before we move on. What if somebody vists an URL for an ``id`` that doesn't exist, like `localhost:5000/99999/ <http://localhost:5000/99999/>`_? Right now Flask throws an ugly error.
 
@@ -861,7 +860,7 @@ Commit that.
 
     $ git add .
     $ git commit -m "Made a map on the detail page"
-    $ git push origin master
+    $ git push origin main
 
 Next we will work to make a map with every victim in ``index.html`` in one view.
 
@@ -1147,7 +1146,7 @@ Commit your map.
 
     $ git add .
     $ git commit -m "Made a map on the index page"
-    $ git push origin master
+    $ git push origin main
 
 
 *********************
@@ -1166,7 +1165,7 @@ Create a new file called ``freeze.py`` where we will configure which pages it sh
 
 .. code-block:: bash
 
-    # Mac and Linux:
+    # in the terminal:
     $ touch freeze.py
 
 Use your text editor to write a basic Frozen Flask configuration.
@@ -1219,14 +1218,14 @@ Commit all of the flat pages to the repository.
 
     $ git add .
     $ git commit -m "Froze my app"
-    $ git push origin master
+    $ git push origin main
 
 Finally, we will publish these static files to the web using `GitHub's Pages <https://pages.github.com/>`_ feature. All it requires is that we create a new branch in our repository called ``gh-pages`` and push our files up to GitHub there.
 
 .. code-block:: bash
 
     $ git checkout -b gh-pages # Create the new branch
-    $ git merge master # Pull in all the code from the master branch
+    $ git merge main # Pull in all the code from the master branch
     $ git push origin gh-pages # Push up to GitHub from your new branch
 
 Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to cross the finish line.
@@ -1254,7 +1253,7 @@ code that controls the design of the page can be stored.
 
 .. code-block:: bash
 
-    # Macs or Linux:
+    # in the terminal:
     $ touch static/style.css
 
 Add the style tag to the top of ``index.html`` so it imported on the page. Flask's built-in ``url_for``
@@ -1846,14 +1845,14 @@ Commit all of the flat pages to the repository.
 
     $ git add .
     $ git commit -m "Froze my restyled app"
-    $ git push origin master
+    $ git push origin main
 
 Republish your work by going back to the ``gh-pages`` branch and pushing up the code.
 
 .. code-block:: bash
 
     $ git checkout gh-pages
-    $ git merge master
+    $ git merge main
     $ git push origin gh-pages
 
 Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to see
