@@ -50,7 +50,7 @@ Before you can begin, your computer needs the following tools installed and work
 Act 1: Hello Codespaces
 ***********************
 
-Start at the `GitHub URL for this repository <https://github.com/NewsApps/first-web-scraper-umd>`_
+Start at the `GitHub URL for this repository <https://github.com/NewsAppsUMD/first-news-app-umd>`_
 
 Click the green "Use this template" button and choose "Open in a codespace". You should see something like this:
 
