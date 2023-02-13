@@ -1807,7 +1807,20 @@ That should shape up the page like this.
 .. image:: /_static/hello-css-detail.png
 
 Now it is time to build out all the pages by running the freeze script that will save all of
-the pages again.
+the pages again. Before you do that, though, we have one change to make to our app.py file to ensure that
+the published version picks up our static files correctly. Add one line to your file:
+
+.. code-block:: python
+    :emphasize-lines: 6
+
+    import csv
+    from flask import Flask
+    from flask import abort
+    from flask import render_template
+    app = Flask(__name__)
+    app.config['FREEZER_RELATIVE_URLS'] = True
+
+Then re-run the freeze.py script to save all of the pages again.
 
 .. code-block:: bash
 
