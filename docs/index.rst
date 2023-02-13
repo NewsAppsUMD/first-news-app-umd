@@ -21,7 +21,7 @@ You will do this with an improved version of the 911 call data that
 
 A working example of what you'll make can be found at `https://newsappsumd.github.io/first-news-app-dwillis/build/index.html <https://newsappsumd.github.io/first-news-app-dwillis/build/index.html>`_
 
-.. image:: /_static/hello-css-markers.png
+.. image:: /_static/hello-css-markers2.png
 
 Past students of this tutorial have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <https://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_.
 
