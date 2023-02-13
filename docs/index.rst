@@ -16,26 +16,24 @@ What you will make
 ******************
 
 By the end of this lesson, you will publish an interactive database and map
-about the dozens of people who died during the riots that swept Los Angeles
-for five days in 1992. You will do this by repurposing the data from `a Los Angeles Times
-application <https://spreadsheets.latimes.com/la-riots-deaths/>`_ that
-accompanied a story released on the 20th anniversary of the riots.
+of one week's worth of 911 calls reporting overdoses in Baltimore City from 2022.
+You will do this with an improved version of the 911 call data that
 
-A working example of what you'll make can be found at `ireapps.github.io/first-news-app/build/index.html <https://ireapps.github.io/first-news-app/build/index.html>`_
+A working example of what you'll make can be found at `https://newsappsumd.github.io/first-news-app-dwillis/build/index.html <https://newsappsumd.github.io/first-news-app-dwillis/build/index.html>`_
 
 .. image:: /_static/hello-css-markers.png
 
-Past students of this class have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <https://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_.
+Past students of this tutorial have gone on to use the skills they learned to create projects like The Chicago Reporter's `police complaints database <http://projects.chicagoreporter.com/settlements/search/cases>`_, the `Naples Daily News' greyhound dogs death database <https://naplesnews-floridagreyhounds.com/build/index.html>`_ and the San Antonio Express-News' `homicide database <http://homicides.expressnews.com/>`_.
 
 *****************
 About the authors
 *****************
 
-This guide was prepared for training sessions of `Investigative Reporters and Editors (IRE) <https://www.ire.org/>`_
+This guide was originally prepared for training sessions of `Investigative Reporters and Editors (IRE) <https://www.ire.org/>`_
 by `Ben Welsh <https://palewi.re/who-is-ben-welsh/>`_. It debuted in February 2014 `at NICAR's conference
 in Baltimore <https://ire.org/events-and-training/event/973/1026/>`_. A revised version was presented at
 `the 2015 conference <https://www.ire.org/conferences/nicar2015/hands-on-training/>`_ in Atlanta and the 2016 conference in
-`Denver <https://www.ire.org/conferences/nicar2016/schedule/>`_. It was taught for the fourth time at `the 2017 conference in Jacksonville <https://www.ire.org/events-and-training/event/2702/2885/>`_ by Armand Emamdjomeh and Ben Welsh.
+`Denver <https://www.ire.org/conferences/nicar2016/schedule/>`_. It was taught for the fourth time at `the 2017 conference in Jacksonville <https://www.ire.org/events-and-training/event/2702/2885/>`_ by Armand Emamdjomeh and Ben Welsh. This revised version was designed by Derek Willis for the News Applications class at the University of Maryland's Philip Merrill College of Journalism.
 
 **********************
 Prelude: Prerequisites
@@ -267,7 +265,7 @@ Start over in your ``templates/index.html`` file with a bare-bones HTML document
     <html lang="en">
         <head></head>
         <body>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
         </body>
     </html>
 
@@ -285,7 +283,7 @@ Make a directory to store our data file.
 
     $ mkdir static
 
-Download `the comma-delimited file <https://raw.github.com/ireapps/first-news-app/master/static/la-riots-deaths.csv>`_ that will be the backbone of our application and save it there as ``la-riots-deaths.csv``. Add it to your git repository.
+Download `the comma-delimited file <https://raw.githubusercontent.com/NewsAppsUMD/first-news-app-umd/main/docs/_static/balt911.csv>`_ that will be the backbone of our application and save it there as ``balt911.csv``. Add it to your git repository.
 
 .. code-block:: bash
 
@@ -306,7 +304,7 @@ First, create the new function and give it the path to your CSV file.
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
 
     @app.route("/")
     def index():
@@ -327,7 +325,7 @@ Open up the file path for reading with Python using the built-in `open <https://
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'rb')
 
     @app.route("/")
@@ -349,7 +347,7 @@ Pass it into the csv module's `DictReader <https://docs.python.org/3/library/csv
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'rb')
         csv_obj = csv.DictReader(csv_file)
 
@@ -376,7 +374,7 @@ A quirk of CSV objects is that once they're used they disappear. There's a good 
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'rb')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -400,7 +398,7 @@ Close the function by returning the csv list.
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'rb')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -425,7 +423,7 @@ Next have your ``index`` function pull the CSV data using your new code and pass
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'r')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -449,7 +447,7 @@ Make sure to save ``app.py``. Then return to the ``index.html`` template. There 
     <html lang="en">
         <head></head>
         <body>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
             {{ object_list }}
         </body>
     </html>
@@ -471,14 +469,14 @@ Now we'll use Jinja to sculpt the data in ``index.html`` to create `an HTML tabl
     <html lang="en">
         <head></head>
         <body>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
             <table border=1 cellpadding=7>
                 <tr>
                     <th>Name</th>
                 </tr>
                 {% for obj in object_list %}
                 <tr>
-                    <td>{{ obj.full_name }}</td>
+                    <td>{{ obj.location }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -498,26 +496,22 @@ Next expand the table to include a lot more data.
     <html lang="en">
         <head></head>
         <body>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
             <table border=1 cellpadding=7>
                 <tr>
-                    <th>Name</th>
+                    <th>Call Number</th>
                     <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Neighborhood</th>
                 </tr>
                 {% for obj in object_list %}
                 <tr>
-                    <td>{{ obj.full_name }}</td>
+                    <td>{{ obj.callNumber }}</td>
                     <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
+                    <td>{{ obj.time }}</td>
+                    <td>{{ obj.location }}</td>
+                    <td>{{ obj.Neighborhood }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -547,7 +541,7 @@ Next we're going to create a unique "detail" page dedicated to each person. Star
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'r')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -559,17 +553,17 @@ Next we're going to create a unique "detail" page dedicated to each person. Star
         object_list = get_csv()
         return render_template(template, object_list=object_list)
 
-    @app.route('/<row_id>/')
-    def detail(row_id):
+    @app.route('/<call_number>/')
+    def detail(call_number):
         template = 'detail.html'
-        return render_template(template, row_id=row_id)
+        return render_template(template, call_number=call_number)
 
     if __name__ == '__main__':
         app.run(debug=True, use_reloader=True)
 
 .. note::
 
-    Notice a key difference between the URL route for the index and the one we just added. This time, both the URL route and function accept an argument, named ``row_id``. Our goal is for the number passed into the URL to go into the function where it can be used to pull the record with the corresponding ``id`` from the CSV. Once we have our hands on it, we can pass it on to the template to render its unique page.
+    Notice a key difference between the URL route for the index and the one we just added. This time, both the URL route and function accept an argument, named ``call_number``. Our goal is for the number passed into the URL to go into the function where it can be used to pull the record with the corresponding ``id`` from the CSV. Once we have our hands on it, we can pass it on to the template to render its unique page.
 
 Create a new file in your templates directory called ``detail.html`` for it to connect with.
 
@@ -582,9 +576,9 @@ Put something simple in it with your text editor. We'll use the same templating 
 
 .. code-block:: html
 
-    Hello {{ row_id }}!
+    Hello {{ call_number }}!
 
-Then, if it's not running, restart your test server and use your browser to visit `localhost:5000/1/ <http://localhost:5000/1/>`_, `localhost:5000/200/ <http://localhost:5000/200/>`_ or any other number.
+Then, if it's not running, restart your test server and use your browser to visit `localhost:5000/P221761572/ <http://localhost:5000/P221761572/>`_.
 
 .. code-block:: bash
 
@@ -592,7 +586,7 @@ Then, if it's not running, restart your test server and use your browser to visi
 
 .. image:: /_static/hello-html-hello-detail.png
 
-To customize the page for each person, we will need to connect the ``row_id`` in the URL with the ``id`` column in the CSV data file.
+To customize the page for each person, we will need to connect the ``call_number`` in the URL with the ``callNumber`` column in the CSV data file.
 
 First, return to ``app.py`` and pull the CSV data into the ``detail`` view.
 
@@ -605,7 +599,7 @@ First, return to ``app.py`` and pull the CSV data into the ``detail`` view.
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'r')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -617,16 +611,16 @@ First, return to ``app.py`` and pull the CSV data into the ``detail`` view.
         object_list = get_csv()
         return render_template(template, object_list=object_list)
 
-    @app.route('/<row_id>/')
-    def detail(row_id):
+    @app.route('/<call_number>/')
+    def detail(call_number):
         template = 'detail.html'
         object_list = get_csv()
-        return render_template(template, row_id=row_id)
+        return render_template(template, call_number=call_number)
 
     if __name__ == '__main__':
         app.run(debug=True, use_reloader=True)
 
-Then have the ``detail`` function loop through the CSV data list, testing each row's ``id`` field against the ``row_id`` provided by the URL. When you find a match, pass that row out to the template for rendering with the name ``object``.
+Then have the ``detail`` function loop through the CSV data list, testing each row's ``callNumber`` field against the ``call_number`` provided by the URL. When you find a match, pass that row out to the template for rendering with the name ``object``.
 
 .. code-block:: python
     :emphasize-lines: 23,24,25
@@ -637,7 +631,7 @@ Then have the ``detail`` function loop through the CSV data list, testing each r
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'r')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -649,12 +643,12 @@ Then have the ``detail`` function loop through the CSV data list, testing each r
         object_list = get_csv()
         return render_template(template, object_list=object_list)
 
-    @app.route('/<row_id>/')
-    def detail(row_id):
+    @app.route('/<call_number>/')
+    def detail(call_number):
         template = 'detail.html'
         object_list = get_csv()
         for row in object_list:
-            if row['id'] == row_id:
+            if row['callNumber'] == call_number:
                 return render_template(template, object=row)
 
     if __name__ == '__main__':
@@ -668,17 +662,17 @@ Now clear ``detail.html`` and make a new HTML document with a headline drawn fro
     <html lang="en">
         <head></head>
         <body>
-            <h1>{{ object.full_name }}</h1>
+            <h1>{{ object.location }}</h1>
         </body>
     </html>
 
-Restart your test server and take a look at ``http://localhost:5000/1/`` again.
+Restart your test server and take a look at ``http://localhost:5000/P221761572/`` again.
 
 .. code-block:: bash
 
     $ python app.py
 
-.. image:: /_static/hello-html-hello-cesar.png
+.. image:: /_static/hello-html-hello-edmonson.png
 
 Return to ``index.html`` and add a hyperlink to each detail page to the table.
 
@@ -689,27 +683,23 @@ Return to ``index.html`` and add a hyperlink to each detail page to the table.
     <html lang="en">
         <head></head>
         <body>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
             <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
             </table>
         </body>
@@ -733,14 +723,13 @@ In ``detail.html`` you can use the rest of the data fields to write a sentence a
         <head></head>
         <body>
             <h1>
-                {{ object.full_name }}, a {{ object.age }} year old,
-                {{ object.race }} {{ object.gender|lower }} died on {{ object.date }}
-                in a {{ object.type|lower }} at {{ object.address }} in {{ object.neighborhood }}.
+                At {{ object.time }} on {{ object.date }}, a 911 call about an overdose was placed from near
+                {{ object.location }} in the {{ object.Neighborhood }} neighborhood.
             </h1>
         </body>
     </html>
 
-Reload `localhost:5000/1/ <http://localhost:5000/1/>`_ to see it.
+Reload `localhost:5000/P221761572/ <http://localhost:5000/P221761572/>`_ to see it.
 
 .. image:: /_static/hello-html-hello-graf.png
 
@@ -749,7 +738,7 @@ Then once again commit your work.
 .. code-block:: bash
 
     $ git add .
-    $ git commit -m "Created a detail page about each victim."
+    $ git commit -m "Created a detail page about each call."
     $ git push origin main
 
 One last thing before we move on. What if somebody vists an URL for an ``id`` that doesn't exist, like `localhost:5000/99999/ <http://localhost:5000/99999/>`_? Right now Flask throws an ugly error.
@@ -768,7 +757,7 @@ The polite thing to do is return what is called a `404 response code <https://en
     app = Flask(__name__)
 
     def get_csv():
-        csv_path = './static/la-riots-deaths.csv'
+        csv_path = './static/balt911.csv'
         csv_file = open(csv_path, 'r')
         csv_obj = csv.DictReader(csv_file)
         csv_list = list(csv_obj)
@@ -780,12 +769,12 @@ The polite thing to do is return what is called a `404 response code <https://en
         object_list = get_csv()
         return render_template(template, object_list=object_list)
 
-    @app.route('/<row_id>/')
-    def detail(row_id):
+    @app.route('/<call_number>/')
+    def detail(call_number):
         template = 'detail.html'
         object_list = get_csv()
         for row in object_list:
-            if row['id'] == row_id:
+            if row['callNumber'] == call_number:
                 return render_template(template, object=row)
         abort(404)
 
@@ -808,14 +797,17 @@ Now we will use the `Leaflet <https://leafletjs.com/>`_ JavaScript library to cr
     <!doctype html>
     <html lang="en">
         <head>
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-            <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
         </head>
         <body>
             <h1>
-                {{ object.full_name }}, a {{ object.age }} year old,
-                {{ object.race }} {{ object.gender|lower }} died on {{ object.date }}
-                in a {{ object.type|lower }} at {{ object.address }} in {{ object.neighborhood }}.
+                At {{ object.time }} on {{ object.date }}, a 911 call about an overdose was placed from near
+                {{ object.location }} in the {{ object.Neighborhood }} neighborhood.
             </h1>
         </body>
     </html>
@@ -828,29 +820,31 @@ Open up ``detail.html`` and make a map there, focus on just that victim.
     <!doctype html>
     <html lang="en">
         <head>
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-            <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+            integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+            crossorigin=""/>
+            <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+         crossorigin=""></script>
         </head>
         <body>
             <div id="map" style="width:100%; height:300px;"></div>
             <h1>
-                {{ object.full_name }}, a {{ object.age }} year old,
-                {{ object.race }} {{ object.gender|lower }} died on {{ object.date }}
-                in a {{ object.type|lower }} at {{ object.address }} in {{ object.neighborhood }}.
+                At {{ object.time }} on {{ object.date }}, a 911 call about an overdose was placed from near
+                {{ object.location }} in the {{ object.Neighborhood }} neighborhood.
             </h1>
             <script type="text/javascript">
-                var map = L.map('map').setView([{{ object.y }}, {{ object.x }}], 16);
-                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
-                });
-                map.addLayer(osmLayer);
-                var marker = L.marker([{{ object.y }}, {{ object.x }}]).addTo(map);
+                var map = L.map('map').setView([{{ object.lat }}, {{ object.lng }}], 16);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                var marker = L.marker([{{ object.lat }}, {{ object.lng }}]).addTo(map);
             </script>
         </body>
     </html>
 
-Reload a detail page, like the one at `localhost:5000/1/ <http://localhost:5000/1/>`_.
+Reload a detail page, like the one at `localhost:5000/P221761572/ <http://localhost:5000/P221761572/>`_.
 
 .. image:: /_static/hello-js-detail-map.png
 
@@ -871,37 +865,37 @@ Create an HTML element to hold the map and use Leaflet to boot it up and center 
 
     <!doctype html>
     <html lang="en">
-        <head>
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-            <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-        </head>
-        <body>
-            <div id="map" style="width:100%; height:300px;"></div>
-            <h1>Deaths during the L.A. riots</h1>
-            <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    </head>
+    <body>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <h1>Baltimore 911 Overdose Calls</h1>
+        <table border=1 cellpadding=7>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
-            </table>
+        </table>
             <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
+                var map = L.map('map').setView([39.3, -76.5], 11);
                 var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
                     attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
@@ -921,61 +915,61 @@ Loop through the CSV data and format it as a `GeoJSON <https://en.wikipedia.org/
     :emphasize-lines: 40-59
 
     <!doctype html>
+    <!doctype html>
     <html lang="en">
-        <head>
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-            <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-        </head>
-        <body>
-            <div id="map" style="width:100%; height:300px;"></div>
-            <h1>Deaths during the L.A. riots</h1>
-            <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    </head>
+    <body>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <h1>Baltimore 911 Overdose Calls</h1>
+        <table border=1 cellpadding=7>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
-            </table>
+        </table>
             <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
+                var map = L.map('map').setView([39.3, -76.5], 11);
                 var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
                 });
                 map.addLayer(osmLayer);
-                var data = {
-                  "type": "FeatureCollection",
-                  "features": [
-                    {% for obj in object_list %}
-                    {
-                      "type": "Feature",
-                      "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
-                      },
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
-                      }
-                    }{% if not loop.last %},{% endif %}
-                    {% endfor %}
-                  ]
-                };
+                var data = [
+                {% for obj in object_list %}
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "full_name": "{{ obj.location }}",
+                    "id": "{{ obj.callNumber }}",
+                    "popupContent": "{{ obj.incidentLocation }}",
+                    "show_on_map": true
+                  },
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ];
                 var dataLayer = L.geoJson(data);
                 map.addLayer(dataLayer);
             </script>
@@ -999,7 +993,7 @@ Add a popup on the map pins that shows the name of the victim.
         </head>
         <body>
             <div id="map" style="width:100%; height:300px;"></div>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
             <table border=1 cellpadding=7>
                 <tr>
                     <th>Name</th>
@@ -1067,71 +1061,69 @@ Now wrap the name in a hyperlink to that person's detail page.
     :emphasize-lines: 58-66
 
     <!doctype html>
-    <html lang="en">
-        <head>
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-            <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-        </head>
-        <body>
-            <div id="map" style="width:100%; height:300px;"></div>
-            <h1>Deaths during the L.A. riots</h1>
-            <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    </head>
+    <body>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <h1>Baltimore 911 Overdose Calls</h1>
+        <table border=1 cellpadding=7>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
-            </table>
-            <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
-                });
-                map.addLayer(osmLayer);
-                var data = {
-                  "type": "FeatureCollection",
-                  "features": [
-                    {% for obj in object_list %}
-                    {
-                      "type": "Feature",
-                      "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
-                      },
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
-                      }
-                    }{% if not loop.last %},{% endif %}
-                    {% endfor %}
-                  ]
-                };
-                var dataLayer = L.geoJson(data, {
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup(
-                            '<a href="' + feature.properties.id + '/">' +
-                                feature.properties.full_name +
-                            '</a>'
-                        );
-                    }
-                });
-                map.addLayer(dataLayer);
+        </table>
+        <script type="text/javascript">
+            var map = L.map('map').setView([39.3, -76.5], 11);
+            var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
+            });
+            map.addLayer(osmLayer);
+            function onEachFeature(feature, layer) {
+                // does this feature have a property named popupContent?
+                if (feature.properties && feature.properties.popupContent) {
+                    layer.bindPopup('<a href="'+ feature.properties.id + '/">' + feature.properties.popupContent + '</a>');
+                }
+            }
+            var data = [
+                {% for obj in object_list %}
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "full_name": "{{ obj.location }}",
+                    "id": "{{ obj.callNumber }}",
+                    "popupContent": "{{ obj.incidentLocation }}",
+                    "show_on_map": true
+                  },
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ];
+            L.geoJSON(data, {
+                onEachFeature: onEachFeature
+            }).addTo(map);
             </script>
         </body>
     </html>
@@ -1201,7 +1193,7 @@ To flatten those, again edit ``freeze.py`` to give it the instructions it needs 
     @freezer.register_generator
     def detail():
         for row in get_csv():
-            yield {'row_id': row['id']}
+            yield {'call_number': row['callNumber']}
 
     if __name__ == '__main__':
         freezer.freeze()
@@ -1266,69 +1258,63 @@ method will create the URL for us.
     <html lang="en">
         <head>
             <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+            <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
         </head>
         <body>
             <div id="map" style="width:100%; height:300px;"></div>
-            <h1>Deaths during the L.A. riots</h1>
+            <h1>Baltimore 911 Overdose Calls</h1>
             <table border=1 cellpadding=7>
                 <tr>
-                    <th>Name</th>
+                    <th>Call Number</th>
                     <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Neighborhood</th>
                 </tr>
-            {% for obj in object_list %}
+                {% for obj in object_list %}
                 <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
+                    <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
                     <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
+                    <td>{{ obj.time }}</td>
+                    <td>{{ obj.location }}</td>
+                    <td>{{ obj.Neighborhood }}</td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
             </table>
             <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
+                var map = L.map('map').setView([39.3, -76.5], 11);
                 var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
+                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
                 });
                 map.addLayer(osmLayer);
-                var data = {
-                  "type": "FeatureCollection",
-                  "features": [
+                function onEachFeature(feature, layer) {
+                    // does this feature have a property named popupContent?
+                    if (feature.properties && feature.properties.popupContent) {
+                        layer.bindPopup('<a href="'+ feature.properties.id + '/">' + feature.properties.popupContent + '</a>');
+                    }
+                }
+                var data = [
                     {% for obj in object_list %}
                     {
                       "type": "Feature",
                       "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
+                        "full_name": "{{ obj.location }}",
+                        "id": "{{ obj.callNumber }}",
+                        "popupContent": "{{ obj.incidentLocation }}",
+                        "show_on_map": true
                       },
                       "geometry": {
                         "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
+                        "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
                       }
                     }{% if not loop.last %},{% endif %}
                     {% endfor %}
-                  ]
-                };
-                var dataLayer = L.geoJson(data, {
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup(
-                            '<a href="' + feature.properties.id + '/">' +
-                                feature.properties.full_name +
-                            '</a>'
-                        );
-                    }
-                });
-                map.addLayer(dataLayer);
+                  ];
+                L.geoJSON(data, {
+                    onEachFeature: onEachFeature
+                }).addTo(map);
             </script>
         </body>
     </html>
@@ -1337,7 +1323,7 @@ method will create the URL for us.
 Before we start styling the page, let's do a little reorganization of the HTML
 to make a little more like a news site.
 
-First, download this `IRE logo <https://raw.githubusercontent.com/ireapps/first-news-app/master/static/irelogo.png>`_
+First, download this `UMD logo <https://raw.githubusercontent.com/NewsAppsUMD/first-news-app-umd/master/static/shell.png>`_
 and throw in the ``static`` directory. We'll add that as an image in a new
 navigation bar at the top of the site, then zip up the headline and move it above the map with
 with a new byline.
@@ -1347,81 +1333,79 @@ with a new byline.
 
     <!doctype html>
     <html lang="en">
-        <head>
-            <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-        </head>
-        <body>
-            <nav>
-                <a href="https://first-news-app.readthedocs.org/">
-                    <img src="{{ url_for('static', filename='irelogo.png') }}">
-                </a>
-            </nav>
-            <header>
-                <h1>These are the 60 people who died during the L.A. riots</h1>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    </head>
+    <body>
+        <nav>
+            <a href="https://first-news-app-umd.readthedocs.org/">
+                <img src="{{ url_for('static', filename='shell.png') }}">
+            </a>
+        </nav>
+        <header>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
                 <div class="byline">
                     By <a href="https://first-news-app-umd.readthedocs.org/">The First News App Tutorial</a>
                 </div>
             </header>
-            <div id="map" style="width:100%; height:300px;"></div>
-            <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <table border=1 cellpadding=7>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
-            </table>
-            <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
-                });
-                map.addLayer(osmLayer);
-                var data = {
-                  "type": "FeatureCollection",
-                  "features": [
-                    {% for obj in object_list %}
-                    {
-                      "type": "Feature",
-                      "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
-                      },
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
-                      }
-                    }{% if not loop.last %},{% endif %}
-                    {% endfor %}
-                  ]
-                };
-                var dataLayer = L.geoJson(data, {
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup(
-                            '<a href="' + feature.properties.id + '/">' +
-                                feature.properties.full_name +
-                            '</a>'
-                        );
-                    }
-                });
-                map.addLayer(dataLayer);
+        </table>
+        <script type="text/javascript">
+            var map = L.map('map').setView([39.3, -76.5], 11);
+            var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
+            });
+            map.addLayer(osmLayer);
+            function onEachFeature(feature, layer) {
+                // does this feature have a property named popupContent?
+                if (feature.properties && feature.properties.popupContent) {
+                    layer.bindPopup('<a href="'+ feature.properties.id + '/">' + feature.properties.popupContent + '</a>');
+                }
+            }
+            var data = [
+                {% for obj in object_list %}
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "full_name": "{{ obj.location }}",
+                    "id": "{{ obj.callNumber }}",
+                    "popupContent": "{{ obj.incidentLocation }}",
+                    "show_on_map": true
+                  },
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ];
+            L.geoJSON(data, {
+                onEachFeature: onEachFeature
+            }).addTo(map);
             </script>
         </body>
     </html>
@@ -1512,82 +1496,76 @@ First the HTML page needs an extra tag to turn the system on.
 
     <!doctype html>
     <html lang="en">
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-        </head>
-        <body>
-            <nav>
-                <a href="https://first-news-app-umd.readthedocs.org/">
-                    <img src="{{ url_for('static', filename='irelogo.png') }}">
-                </a>
-            </nav>
-            <header>
-                <h1>These are the 60 people who died during the L.A. riots</h1>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    </head>
+    <body>
+        <nav>
+            <a href="https://first-news-app-umd.readthedocs.org/">
+                <img src="{{ url_for('static', filename='shell.png') }}">
+            </a>
+        </nav>
+        <header>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
                 <div class="byline">
                     By <a href="https://first-news-app-umd.readthedocs.org/">The First News App Tutorial</a>
                 </div>
             </header>
-            <div id="map" style="width:100%; height:300px;"></div>
-            <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <table border=1 cellpadding=7>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
-            </table>
-            <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
-                });
-                map.addLayer(osmLayer);
-                var data = {
-                  "type": "FeatureCollection",
-                  "features": [
-                    {% for obj in object_list %}
-                    {
-                      "type": "Feature",
-                      "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
-                      },
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
-                      }
-                    }{% if not loop.last %},{% endif %}
-                    {% endfor %}
-                  ]
-                };
-                var dataLayer = L.geoJson(data, {
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup(
-                            '<a href="' + feature.properties.id + '/">' +
-                                feature.properties.full_name +
-                            '</a>'
-                        );
-                    }
-                });
-                map.addLayer(dataLayer);
+        </table>
+        <script type="text/javascript">
+            var map = L.map('map').setView([39.3, -76.5], 11);
+            var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
+            });
+            map.addLayer(osmLayer);
+            function onEachFeature(feature, layer) {
+                // does this feature have a property named popupContent?
+                if (feature.properties && feature.properties.popupContent) {
+                    layer.bindPopup('<a href="'+ feature.properties.id + '/">' + feature.properties.popupContent + '</a>');
+                }
+            }
+            var data = [
+                {% for obj in object_list %}
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "full_name": "{{ obj.location }}",
+                    "id": "{{ obj.callNumber }}",
+                    "popupContent": "{{ obj.incidentLocation }}",
+                    "show_on_map": true
+                  },
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ];
+            L.geoJSON(data, {
+                onEachFeature: onEachFeature
+            }).addTo(map);
             </script>
         </body>
     </html>
@@ -1683,7 +1661,7 @@ when visited by a mobile phone.
 We can punch up the map markers by replacing the Leaflet default pins with custom
 designs from the `Mapbox's open-source Maki set <https://www.mapbox.com/maki/>`_.
 
-Download `these <https://github.com/ireapps/first-news-app/blob/master/static/marker-24.png>`_ `two <https://github.com/ireapps/first-news-app/blob/master/static/marker-24%402x.png>`_
+Download `these <https://github.com/NewsAppsUMD/first-news-app-umd/blob/master/static/marker-24.png>`_ `two <https://github.com/NewsAppsUMD/first-news-app-umd/blob/master/static/marker-24%402x.png>`_
 black pin images and add them to your ``static`` directory.
 
 Now expand our Leaflet JavaScript code to substitute these images for the defaults.
@@ -1693,98 +1671,92 @@ Now expand our Leaflet JavaScript code to substitute these images for the defaul
 
     <!doctype html>
     <html lang="en">
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-        </head>
-        <body>
-            <nav>
-                <a href="https://first-news-app-umd.readthedocs.org/">
-                    <img src="{{ url_for('static', filename='irelogo.png') }}">
-                </a>
-            </nav>
-            <header>
-                <h1>These are the 60 people who died during the L.A. riots</h1>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    </head>
+    <body>
+        <nav>
+            <a href="https://first-news-app-umd.readthedocs.org/">
+                <img src="{{ url_for('static', filename='shell.png') }}">
+            </a>
+        </nav>
+        <header>
+            <h1>One Week of Baltimore 911 Overdose Calls</h1>
                 <div class="byline">
-                    By <a href="https://first-news-app.readthedocs.org/">The First News App Tutorial</a>
+                    By <a href="https://first-news-app-umd.readthedocs.org/">The First News App Tutorial</a>
                 </div>
             </header>
-            <div id="map" style="width:100%; height:300px;"></div>
-            <table border=1 cellpadding=7>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
-                </tr>
+        <div id="map" style="width:100%; height:300px;"></div>
+        <table border=1 cellpadding=7>
+            <tr>
+                <th>Call Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Neighborhood</th>
+            </tr>
             {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
-                    <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
-                </tr>
+            <tr>
+                <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.Neighborhood }}</td>
+            </tr>
             {% endfor %}
-            </table>
-            <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
-                var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
-                });
-                map.addLayer(osmLayer);
-                var data = {
-                  "type": "FeatureCollection",
-                  "features": [
-                    {% for obj in object_list %}
-                    {
-                      "type": "Feature",
-                      "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
-                      },
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
-                      }
-                    }{% if not loop.last %},{% endif %}
-                    {% endfor %}
-                  ]
-                };
+        </table>
+        <script type="text/javascript">
+            var map = L.map('map').setView([39.3, -76.5], 11);
+            var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>.'
+            });
+            map.addLayer(osmLayer);
+            function onEachFeature(feature, layer) {
+                // does this feature have a property named popupContent?
+                if (feature.properties && feature.properties.popupContent) {
+                    layer.bindPopup('<a href="'+ feature.properties.id + '/">' + feature.properties.popupContent + '</a>');
+                }
+            }
+            var data = [
+                {% for obj in object_list %}
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "full_name": "{{ obj.location }}",
+                    "id": "{{ obj.callNumber }}",
+                    "popupContent": "{{ obj.incidentLocation }}",
+                    "show_on_map": true
+                  },
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
+                  }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ];
                 var blackIcon = L.Icon.extend({
                     options: {
                         iconUrl: "{{ url_for('static', filename='marker-24.png') }}",
                         iconSize: [24, 24]
                     }
                 });
-                var dataLayer = L.geoJson(data, {
+                L.geoJSON(data, {
                     pointToLayer: function (feature, latlng) {
                         return L.marker(latlng, {icon: new blackIcon()});
                     },
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup(
-                            '<a href="' + feature.properties.id + '/">' +
-                                feature.properties.full_name +
-                            '</a>'
-                        );
-                    }
-                });
-                map.addLayer(dataLayer);
+                    onEachFeature: onEachFeature
+                }).addTo(map);
             </script>
         </body>
     </html>
 
 That will restyle the map to look like this.
 
-.. image:: /_static/hello-css-markers.png
+.. image:: /_static/hello-css-markers2.png
 
 Extending this new design to detail page is simply a matter of repeating the steps above.
 
@@ -1802,16 +1774,18 @@ Extending this new design to detail page is simply a matter of repeating the ste
         <body>
             <nav>
                 <a href="https://first-news-app-umd.readthedocs.org/">
-                    <img src="{{ url_for('static', filename='irelogo.png') }}">
+                    <img src="{{ url_for('static', filename='shell.png') }}">
                 </a>
             </nav>
             <header>
-                <h1>{{ object.full_name }}, a {{ object.age }} year old, {{ object.race|lower }} {{ object.gender|lower }} died on {{ object.date }}
-        in a {{ object.type|lower }} at {{ object.address }} in {{ object.neighborhood }}.</h1>
+                <h1>
+                    At {{ object.time }} on {{ object.date }}, a 911 call about an overdose was placed from near
+                    {{ object.location }} in the {{ object.Neighborhood }} neighborhood.
+                </h1>
             </header>
             <div id="map" style="width:100%; height:300px;"></div>
             <script type="text/javascript">
-                var map = L.map('map').setView([{{ object.y }}, {{ object.x }}], 16);
+                var map = L.map('map').setView([{{ object.lat }}, {{ object.lng }}], 16);
                 var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
                     attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
@@ -1823,7 +1797,7 @@ Extending this new design to detail page is simply a matter of repeating the ste
                         iconSize: [24, 24]
                     }
                 });
-                var marker = L.marker([{{ object.y }}, {{ object.x }}], {icon: new blackIcon()}).addTo(map);
+                var marker = L.marker([{{ object.lat }}, {{ object.lng }}], {icon: new blackIcon()}).addTo(map);
             </script>
         </body>
     </html>
@@ -1855,5 +1829,5 @@ Republish your work by going back to the ``gh-pages`` branch and pushing up the 
     $ git merge main
     $ git push origin gh-pages
 
-Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to see
+Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app-umd/build/index.html`` to see
 the restyled application.
