@@ -210,7 +210,7 @@ Return to your command line and create a directory to store your templates in `t
 Next create the ``index.html`` file we referenced in ``app.py``. This is the HTML file where your will lay out your webpage.
 
 .. code-block:: bash
-:
+
     $ touch templates/index.html
 
 Open it up in your text editor and write something clever.
@@ -361,7 +361,7 @@ Pass it into the csv module's `DictReader <https://docs.python.org/3/library/csv
 
 .. note::
 
-    Don't know what a dictionary is? That's okay. You can read more about them `here <https://learnpythonthehardway.org/book/ex39.html>`_ but the minimum you need to know now is that they are Python's way of handling each row in your CSV. The columns there, like ``id`` or ``gender``, are translated into "keys" on dictionary objects that you can access like ``row['id']``.
+    Don't know what a dictionary is? That's okay. You can read more about them `here <https://learnpythonthehardway.org/book/ex39.html>`_ but the minimum you need to know now is that they are Python's way of handling each row in your CSV. The columns there, like ``callNumber`` or ``location``, are translated into "keys" on dictionary objects that you can access like ``row['id']``.
 
 A quirk of CSV objects is that once they're used they disappear. There's a good reason related to efficiency and memory limitations and all that but we won't bother with that here. Just take our word and use Python's built-in ``list`` function to convert this one to a permanent list.
 
@@ -458,7 +458,7 @@ If it isn't already running, return the command line, restart your test server a
 
     $ python app.py
 
-.. image:: /_static/hello-html-dump.png
+.. image:: /_static/hello-html-dump2.png
 
 Now we'll use Jinja to sculpt the data in ``index.html`` to create `an HTML table <https://www.w3schools.com/html/html_tables.asp>`_ that lists all the names. Flask's templating language allows us to loop through the data list and print out a row for each record.
 
@@ -485,7 +485,7 @@ Now we'll use Jinja to sculpt the data in ``index.html`` to create `an HTML tabl
 
 Pause to reload your browser page.
 
-.. image:: /_static/hello-html-names.png
+.. image:: /_static/hello-html-names2.png
 
 Next expand the table to include a lot more data.
 
@@ -520,7 +520,7 @@ Next expand the table to include a lot more data.
 
 Reload your page in the browser again to see the change.
 
-.. image:: /_static/hello-html-table.png
+.. image:: /_static/hello-html-table2.png
 
 Then commit your work.
 
@@ -584,7 +584,7 @@ Then, if it's not running, restart your test server and use your browser to visi
 
     $ python app.py
 
-.. image:: /_static/hello-html-hello-detail.png
+.. image:: /_static/hello-html-hello-detail2.png
 
 To customize the page for each person, we will need to connect the ``call_number`` in the URL with the ``callNumber`` column in the CSV data file.
 
@@ -711,7 +711,7 @@ Restart your test server and take a look at ``http://localhost:5000/``.
 
     $ python app.py
 
-.. image:: /_static/hello-html-hello-links.png
+.. image:: /_static/hello-html-hello-links2.png
 
 In ``detail.html`` you can use the rest of the data fields to write a sentence about the victim.
 
@@ -731,7 +731,7 @@ In ``detail.html`` you can use the rest of the data fields to write a sentence a
 
 Reload `localhost:5000/P221761572/ <http://localhost:5000/P221761572/>`_ to see it.
 
-.. image:: /_static/hello-html-hello-graf.png
+.. image:: /_static/hello-html-hello-graf2.png
 
 Then once again commit your work.
 
@@ -743,7 +743,7 @@ Then once again commit your work.
 
 One last thing before we move on. What if somebody vists an URL for an ``id`` that doesn't exist, like `localhost:5000/99999/ <http://localhost:5000/99999/>`_? Right now Flask throws an ugly error.
 
-.. image:: /_static/hello-html-error.png
+.. image:: /_static/hello-html-error2.png
 
 The polite thing to do is return what is called a `404 response code <https://en.wikipedia.org/wiki/HTTP_404>`_. To do that with Flask, you only need to import a function called ``abort`` and run it after our loop finishes without finding a match.
 
@@ -846,7 +846,7 @@ Open up ``detail.html`` and make a map there, focus on just that victim.
 
 Reload a detail page, like the one at `localhost:5000/P221761572/ <http://localhost:5000/P221761572/>`_.
 
-.. image:: /_static/hello-js-detail-map.png
+.. image:: /_static/hello-js-detail-map2.png
 
 Commit that.
 
@@ -907,7 +907,7 @@ Create an HTML element to hold the map and use Leaflet to boot it up and center 
 
 Reload the root URL of your site at `localhost:5000 <http://localhost:5000/>`_.
 
-.. image:: /_static/hello-js-empty-map.png
+.. image:: /_static/hello-js-empty-map2.png
 
 Loop through the CSV data and format it as a `GeoJSON <https://en.wikipedia.org/wiki/GeoJSON>`_ object, which Leaflet can easily load.
 
@@ -978,7 +978,7 @@ Loop through the CSV data and format it as a `GeoJSON <https://en.wikipedia.org/
 
 Reload the page.
 
-.. image:: /_static/hello-js-pins.png
+.. image:: /_static/hello-js-pins2.png
 
 Add a popup on the map pins that shows the name of the victim.
 
@@ -1130,7 +1130,7 @@ Now wrap the name in a hyperlink to that person's detail page.
 
 Reload again and click a pin.
 
-.. image:: /_static/hello-js-pin-link.png
+.. image:: /_static/hello-js-pin-link2.png
 
 Commit your map.
 
@@ -1222,7 +1222,7 @@ Finally, we will publish these static files to the web using `GitHub's Pages <ht
 
 Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to cross the finish line.
 
-.. image:: /_static/hello-internet.png
+.. image:: /_static/hello-internet2.png
 
 .. note::
 
@@ -1483,7 +1483,7 @@ of the page.
 
 Reload the page and you should see something a little more presentable.
 
-.. image:: /_static/hello-css-desktop.png
+.. image:: /_static/hello-css-desktop2.png
 
 The next step is to upgrade the styles to reshape the page on smaller devices
 like tablets and phones. This is done using a system known as `responsive design <https://en.wikipedia.org/wiki/Responsive_web_design>`_
@@ -1656,7 +1656,7 @@ that will drop columns from the table on smaller devices.
 Reload the page and size down your browser to see how the page should appear
 when visited by a mobile phone.
 
-.. image:: /_static/hello-css-mobile.png
+.. image:: /_static/hello-css-mobile2.png
 
 We can punch up the map markers by replacing the Leaflet default pins with custom
 designs from the `Mapbox's open-source Maki set <https://www.mapbox.com/maki/>`_.
