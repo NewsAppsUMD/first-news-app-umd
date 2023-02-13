@@ -1061,14 +1061,10 @@ Now wrap the name in a hyperlink to that person's detail page.
     :emphasize-lines: 58-66
 
     <!doctype html>
-<html lang="en">
+    <html lang="en">
     <head>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-        crossorigin=""/>
-        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     </head>
     <body>
         <div id="map" style="width:100%; height:300px;"></div>
@@ -1220,7 +1216,7 @@ Finally, we will publish these static files to the web using `GitHub's Pages <ht
     $ git merge main # Pull in all the code from the master branch
     $ git push origin gh-pages # Push up to GitHub from your new branch
 
-Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app/build/index.html`` to cross the finish line.
+Now wait a minute or two, then visit ``https://newsappsumd.github.io/first-news-app-<yourusername>/build/index.html`` to cross the finish line.
 
 .. image:: /_static/hello-internet2.png
 
@@ -1842,5 +1838,5 @@ Republish your work by going back to the ``gh-pages`` branch and pushing up the 
     $ git merge main
     $ git push origin gh-pages
 
-Now wait a minute or two, then visit ``https://<yourusername>.github.io/first-news-app-umd/build/index.html`` to see
+Now wait a minute or two, then visit ``https://newsappsumd.github.io/first-news-app-<yourusername>-umd/build/index.html`` to see
 the restyled application.
