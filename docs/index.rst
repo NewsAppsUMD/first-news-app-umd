@@ -713,7 +713,7 @@ Restart your test server and take a look at ``http://localhost:5000/``.
 
 .. image:: /_static/hello-html-hello-links2.png
 
-In ``detail.html`` you can use the rest of the data fields to write a sentence about the victim.
+In ``detail.html`` you can use the rest of the data fields to write a sentence about the 911 call.
 
 .. code-block:: html
     :emphasize-lines: 5-10
@@ -789,7 +789,7 @@ Reload your bad URL and you'll see the change.
 Act 4: Hello JavaScript
 ***********************
 
-Now we will use the `Leaflet <https://leafletjs.com/>`_ JavaScript library to create a map on each detail page showing where the victim died. Start by importing it in your page.
+Now we will use the `Leaflet <https://leafletjs.com/>`_ JavaScript library to create a map on each detail page showing where the call was made. Start by importing it in your page.
 
 .. code-block:: html
     :emphasize-lines: 3-6
@@ -812,7 +812,7 @@ Now we will use the `Leaflet <https://leafletjs.com/>`_ JavaScript library to cr
         </body>
     </html>
 
-Open up ``detail.html`` and make a map there, focus on just that victim.
+Open up ``detail.html`` and make a map there, focus on just that call.
 
 .. code-block:: html
     :emphasize-lines: 8,14-23
@@ -856,9 +856,9 @@ Commit that.
     $ git commit -m "Made a map on the detail page"
     $ git push origin main
 
-Next we will work to make a map with every victim in ``index.html`` in one view.
+Next we will work to make a map with every call in ``index.html`` in one view.
 
-Create an HTML element to hold the map and use Leaflet to boot it up and center on Los Angeles.
+Create an HTML element to hold the map and use Leaflet to boot it up and center on Baltimore.
 
 .. code-block:: html
     :emphasize-lines: 4-5,8,32-40
@@ -980,7 +980,7 @@ Reload the page.
 
 .. image:: /_static/hello-js-pins2.png
 
-Add a popup on the map pins that shows the name of the victim.
+Add a popup on the map pins that shows the location of the call.
 
 .. code-block:: html
     :emphasize-lines: 58-62
@@ -988,36 +988,36 @@ Add a popup on the map pins that shows the name of the victim.
     <!doctype html>
     <html lang="en">
         <head>
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-            <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
         </head>
         <body>
             <div id="map" style="width:100%; height:300px;"></div>
             <h1>One Week of Baltimore 911 Overdose Calls</h1>
             <table border=1 cellpadding=7>
                 <tr>
-                    <th>Name</th>
+                    <th>Call Number</th>
                     <th>Date</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Race</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Neighborhood</th>
                 </tr>
-            {% for obj in object_list %}
+                {% for obj in object_list %}
                 <tr>
-                    <td><a href="{{ obj.id }}/">{{ obj.full_name }}</a></td>
+                    <td><a href="{{ obj.callNumber }}/">{{ obj.callNumber }}</a></td>
                     <td>{{ obj.date }}</td>
-                    <td>{{ obj.type }}</td>
-                    <td>{{ obj.address }}</td>
-                    <td>{{ obj.age }}</td>
-                    <td>{{ obj.gender }}</td>
-                    <td>{{ obj.race }}</td>
+                    <td>{{ obj.time }}</td>
+                    <td>{{ obj.location }}</td>
+                    <td>{{ obj.Neighborhood }}</td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
             </table>
             <script type="text/javascript">
-                var map = L.map('map').setView([34.055, -118.35], 9);
+                var map = L.map('map').setView([39.3, -76.5], 11);
                 var osmLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
                     attribution: 'Data, imagery and map information provided by <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.'
@@ -1030,12 +1030,12 @@ Add a popup on the map pins that shows the name of the victim.
                     {
                       "type": "Feature",
                       "properties": {
-                        "full_name": "{{ obj.full_name }}",
-                        "id": "{{ obj.id }}"
+                        "full_name": "{{ obj.location }}",
+                        "id": "{{ obj.callNumber }}"
                       },
                       "geometry": {
                         "type": "Point",
-                        "coordinates": [{{ obj.x }}, {{ obj.y }}]
+                        "coordinates": [{{ obj.lng }}, {{ obj.lat }}]
                       }
                     }{% if not loop.last %},{% endif %}
                     {% endfor %}
