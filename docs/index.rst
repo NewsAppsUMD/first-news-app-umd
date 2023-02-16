@@ -1838,5 +1838,5 @@ Republish your work by going back to the ``gh-pages`` branch and pushing up the 
     $ git merge main
     $ git push origin gh-pages
 
-Now wait a minute or two, then visit ``https://newsappsumd.github.io/first-news-app-<yourusername>-umd/build/index.html`` to see
+Now wait a minute or two, then visit ``https://newsappsumd.github.io/first-news-app-<yourusername>/build/index.html`` to see
 the restyled application.
