@@ -1800,7 +1800,7 @@ Extending this new design to detail page is simply a matter of repeating the ste
 
 That should shape up the page like this.
 
-.. image:: /_static/hello-css-detail.png
+.. image:: /_static/hello-css-detail2.png
 
 Now it is time to build out all the pages by running the freeze script that will save all of
 the pages again. Before you do that, though, we have one change to make to our app.py file to ensure that
