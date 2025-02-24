@@ -1213,7 +1213,7 @@ Finally, we will publish these static files to the web using `GitHub's Pages <ht
 .. code-block:: bash
 
     $ git checkout -b gh-pages # Create the new branch
-    $ git merge main # Pull in all the code from the master branch
+    $ git merge main # Pull in all the code from the main branch
     $ git push origin gh-pages # Push up to GitHub from your new branch
 
 Now wait a minute or two, then visit ``https://newsappsumd.github.io/first-news-app-<yourusername>/build/index.html`` to cross the finish line.
@@ -1230,14 +1230,14 @@ So you've built a site. But it's kind of janky looking. The next chapter will sh
 Epilogue: Hello CSS
 *******************
 
-Before you get started, move back to the master branch of your repository.
+Before you get started, move back to the main branch of your repository.
 
 .. code-block:: bash
 
-    $ git checkout master
+    $ git checkout main
 
 The first step is to create a stylesheet in the static directory where `CSS <https://en.wikipedia.org/wiki/Cascading_Style_Sheets>`_
-code that controls the design of the page can be stored.
+code that controls the design of the page can be stored. If you already have one, you can skip this step.
 
 .. code-block:: bash
 
